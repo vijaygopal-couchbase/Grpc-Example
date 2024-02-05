@@ -6,7 +6,7 @@ import io.grpc.stub.StreamObserver;
 public class OutputStreamObserver implements StreamObserver<DBWriterService.TradeDataResponse> {
     @Override
     public void onNext(DBWriterService.TradeDataResponse tradeDataResponse) {
-        System.out.println("Key -- "+tradeDataResponse.getKey()+" record saved in database datetime :: " + tradeDataResponse.getRespTime());
+        System.out.println("Thread Name - "+Thread.currentThread().getName()+" ::::  Key -- "+tradeDataResponse.getKey()+" record saved in database datetime :: " + tradeDataResponse.getRespTime());
     }
 
     @Override

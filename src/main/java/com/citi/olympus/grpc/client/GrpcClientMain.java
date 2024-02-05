@@ -4,19 +4,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
 
 @SpringBootApplication
 @PropertySource("classpath:application.properties")
+@EnableAsync
 public class GrpcClientMain {
     public static void main(String args[]) throws InterruptedException {
         new SpringApplicationBuilder(GrpcClientMain.class)
                 .logStartupInfo(false)
                 .run();
     }
-    @Bean(name = "asyncExecutor")
+    @Bean(name = "grpcThreadExecutor")
     public Executor asyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(5);

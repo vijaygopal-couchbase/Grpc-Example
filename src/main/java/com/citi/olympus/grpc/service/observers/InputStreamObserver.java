@@ -30,13 +30,13 @@ public class InputStreamObserver implements StreamObserver<DBWriterService.Trade
     @Override
     public void onNext(DBWriterService.TradeDataRequest tradeDataRequest) {
         String key = UUID.randomUUID().toString();
-        System.out.println("Key -- "+key+" -- Request created date time :: "+ tradeDataRequest.getReqTime());
-        System.out.println("Key -- "+key+" -- Request before sending date time :: "+ LocalDateTime.now().toString());
+        System.out.println("Thread Name - "+Thread.currentThread().getName()+" :::: Key -- "+key+" -- Request created date time :: "+ tradeDataRequest.getReqTime());
+        System.out.println("Thread Name - "+Thread.currentThread().getName()+" :::: Key -- "+key+" -- Request before sending date time :: "+ LocalDateTime.now().toString());
         keyTracker.push(key);
         JsonObject reqObj = JsonObject.create();
         reqObj.put("tradeDataReqTime",tradeDataRequest.getReqTime());
         collection.insert(key,reqObj);
-        System.out.println("Key -- "+key+" -- Post persisting to database :: "+ LocalDateTime.now().toString());
+        System.out.println("Thread Name - "+Thread.currentThread().getName()+" :::: Key -- "+key+" -- Post persisting to database :: "+ LocalDateTime.now().toString());
     }
 
     @Override
