@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_package= "com.citi.olympus.grpc.stub";
+//option java_multiple_files = true;
+
+message TradeDataRequest{
+    string reqTime = 1;
+}
+
+message TradeDataResponse{
+    string respTime = 1;
+    string key = 2;
+}
+
+service WriteService{
+  rpc validateTradeData(stream TradeDataRequest) returns (TradeDataResponse){};
+}
